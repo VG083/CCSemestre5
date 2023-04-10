@@ -6,25 +6,7 @@ public class Grafo {
     private ArrayList<Vertice> vertices;
     private ArrayList<Aresta> arestas;
     private boolean isDigrafo;
-
-    public int getOrdem() {
-        return ordem;
-    }
-
-    public void setOrdem(int ordem) {
-        this.ordem = ordem;
-    }
-
     private int ordem;
-
-    public int getTamanho() {
-        return tamanho;
-    }
-
-    public void setTamanho(int tamanho) {
-        this.tamanho = tamanho;
-    }
-
     private int tamanho;
 
     public Grafo(boolean isDigrafo) {
@@ -42,6 +24,7 @@ public class Grafo {
         vertices.add(vertice);
         ordem++;
     }
+
     public void addAresta(Aresta aresta){
         arestas.add(aresta);
         tamanho++;
@@ -49,12 +32,13 @@ public class Grafo {
             aresta.getOrigem().setGrauOut(aresta.getOrigem().getGrauOut() + 1);
             aresta.getDestino().setGrauIn(aresta.getDestino().getGrauIn() + 1);
         } else {
-            aresta.getOrigem().setGrau(aresta.getOrigem().getGrau());
+            aresta.getOrigem().setGrau(aresta.getOrigem().getGrau() + 1);
             aresta.getDestino().setGrau(aresta.getDestino().getGrau() + 1);
         }
     }
+
     public boolean descobreSeDigrafo(){
-        for (Aresta a : arestas){ //for-each
+        for (Aresta a : arestas){
             if (a.getOrigem() == a.getDestino()) {
                 System.out.println("É Digrafo");
                 isDigrafo = true;
@@ -70,6 +54,7 @@ public class Grafo {
         }
         return false;
     }
+
     public String toString(){
         StringBuilder infoGrafo = new StringBuilder();
 
@@ -104,5 +89,57 @@ public class Grafo {
                 adjacencias.add(aresta.getDestino());
         }
         return adjacencias;
+    }
+    public void exibeMatrizAdjacencia() {
+        int[][] matrizAdjacencia = new int[ordem][ordem];
+
+        for (Aresta aresta : arestas) {
+            int origemIndex = vertices.indexOf(aresta.getOrigem());
+            int destinoIndex = vertices.indexOf(aresta.getDestino());
+
+            matrizAdjacencia[origemIndex][destinoIndex] = 1;
+
+            if (!isDigrafo) {
+                matrizAdjacencia[destinoIndex][origemIndex] = 1;
+            }
+        }
+
+        System.out.println("Matriz de Adjacência:");
+
+        for (int i = 0; i < ordem; i++) {
+            for (int j = 0; j < ordem; j++) {
+                System.out.print(matrizAdjacencia[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public void exibirMatrizIncidencia() {
+        int[][] matrizIncidencia = new int[vertices.size()][arestas.size()];
+
+        for (int i = 0; i < vertices.size(); i++) {
+            for (int j = 0; j < arestas.size(); j++) {
+                if (isDigrafo) {
+                    if (arestas.get(j).getOrigem().equals(vertices.get(i))) {
+                        matrizIncidencia[i][j] = 1;
+                    } else if (arestas.get(j).getDestino().equals(vertices.get(i))) {
+                        matrizIncidencia[i][j] = -1;
+                    }
+                } else {
+                    if (arestas.get(j).getOrigem().equals(vertices.get(i)) ||
+                            arestas.get(j).getDestino().equals(vertices.get(i))) {
+                        matrizIncidencia[i][j] = 1;
+                    }
+                }
+            }
+        }
+
+        System.out.println("Matriz de incidência:");
+        for (int i = 0; i < vertices.size(); i++) {
+            for (int j = 0; j < arestas.size(); j++) {
+                System.out.print(matrizIncidencia[i][j] + " ");
+            }
+            System.out.println();
+        }
     }
 }

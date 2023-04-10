@@ -1,5 +1,20 @@
-
 public class Vertice {
+    private String nome;
+    private int grau;
+    private int grauIn;
+    private int grauOut;
+
+    public Vertice(String nome) {
+        this.nome = nome;
+    }
+
+    public Vertice(String nome, int grau, int grauIn, int grauOut) {
+        this.nome = nome;
+        this.grau = grau;
+        this.grauIn = grauIn;
+        this.grauOut = grauOut;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -7,8 +22,6 @@ public class Vertice {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
-    private String nome;
 
     public int getGrau() {
         return grau;
@@ -18,8 +31,6 @@ public class Vertice {
         this.grau = grau;
     }
 
-    private int grau;
-
     public int getGrauIn() {
         return grauIn;
     }
@@ -27,8 +38,6 @@ public class Vertice {
     public void setGrauIn(int grauIn) {
         this.grauIn = grauIn;
     }
-
-    private int grauIn;
 
     public int getGrauOut() {
         return grauOut;
@@ -38,13 +47,7 @@ public class Vertice {
         this.grauOut = grauOut;
     }
 
-    private int grauOut;
-
-    public Vertice(String nome){
-        this.nome = nome;
-    }
-
-    public String toString(){
+    public String toString() {
         return nome + " (grau: " + grau + ")";
     }
 }

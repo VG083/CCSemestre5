@@ -1,5 +1,10 @@
 public class Aresta {
-    public Aresta(Vertice v1, Vertice v2) {
+    private Vertice origem;
+    private Vertice destino;
+
+    public Aresta(Vertice origem, Vertice destino) {
+        this.origem = origem;
+        this.destino = destino;
     }
 
     public Vertice getOrigem() {
@@ -10,8 +15,6 @@ public class Aresta {
         this.origem = origem;
     }
 
-    private Vertice origem;
-
     public Vertice getDestino() {
         return destino;
     }
@@ -20,9 +23,7 @@ public class Aresta {
         this.destino = destino;
     }
 
-    private Vertice destino;
-
-    public String toString(){
-        return "("+ origem.getNome() + "," + destino.getNome() + ")";
+    public String toString() {
+        return "(" + origem.getNome() + "," + destino.getNome() + ")";
     }
 }
