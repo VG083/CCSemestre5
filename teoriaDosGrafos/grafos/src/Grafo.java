@@ -96,17 +96,22 @@ public class Grafo {
         for (Aresta aresta : arestas) {
             int origemIndex = vertices.indexOf(aresta.getOrigem());
             int destinoIndex = vertices.indexOf(aresta.getDestino());
-
             matrizAdjacencia[origemIndex][destinoIndex] = 1;
-
             if (!isDigrafo) {
                 matrizAdjacencia[destinoIndex][origemIndex] = 1;
             }
         }
 
         System.out.println("Matriz de Adjacência:");
-
+        // Imprime o cabeçalho com os nomes dos vértices no eixo X
+        System.out.print("  ");
         for (int i = 0; i < ordem; i++) {
+            System.out.print(vertices.get(i).getNome() + " ");
+        }
+        System.out.println();
+        // Imprime a matriz de adjacência com os nomes dos vértices no eixo Y
+        for (int i = 0; i < ordem; i++) {
+            System.out.print(vertices.get(i).getNome() + " ");
             for (int j = 0; j < ordem; j++) {
                 System.out.print(matrizAdjacencia[i][j] + " ");
             }
@@ -122,9 +127,13 @@ public class Grafo {
                 if (isDigrafo) {
                     if (arestas.get(j).getOrigem().equals(vertices.get(i))) {
                         matrizIncidencia[i][j] = 1;
+                        if ((arestas.get(j).getOrigem().equals(vertices.get(i))) == (arestas.get(j).getDestino().equals(vertices.get(i)))){
+                            matrizIncidencia[i][j] = 2;
+                        }
                     } else if (arestas.get(j).getDestino().equals(vertices.get(i))) {
                         matrizIncidencia[i][j] = -1;
                     }
+
                 } else {
                     if (arestas.get(j).getOrigem().equals(vertices.get(i)) ||
                             arestas.get(j).getDestino().equals(vertices.get(i))) {
@@ -136,8 +145,9 @@ public class Grafo {
 
         System.out.println("Matriz de incidência:");
         for (int i = 0; i < vertices.size(); i++) {
+            System.out.print(vertices.get(i).getNome() + "\t");
             for (int j = 0; j < arestas.size(); j++) {
-                System.out.print(matrizIncidencia[i][j] + " ");
+                System.out.print(matrizIncidencia[i][j] + "\t");
             }
             System.out.println();
         }
