@@ -144,6 +144,11 @@ public class Grafo {
         }
 
         System.out.println("Matriz de incidência:");
+        System.out.print("    ");
+        for (int i = 0; i < arestas.size(); i++) {
+            System.out.print(arestas.get(i).getNome() + "\t");
+        }
+        System.out.println("");
         for (int i = 0; i < vertices.size(); i++) {
             System.out.print(vertices.get(i).getNome() + "\t");
             for (int j = 0; j < arestas.size(); j++) {

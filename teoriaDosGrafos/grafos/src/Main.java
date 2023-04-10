@@ -17,13 +17,13 @@ public class Main {
         g.addVertice(vx);
         g.addVertice(vy);
 
-        Aresta aa = new Aresta(vu,vu);
-        Aresta ab = new Aresta(vv,vw);
-        Aresta ac = new Aresta(vw,vx);
-        Aresta ad = new Aresta(vv,vx);
-        Aresta ae = new Aresta(vw,vx);
-        Aresta af = new Aresta(vu,vx);
-        Aresta ag = new Aresta(vx,vy);
+        Aresta aa = new Aresta(vu,vu, "a");
+        Aresta ab = new Aresta(vv,vw, "b");
+        Aresta ac = new Aresta(vw,vx, "c");
+        Aresta ad = new Aresta(vv,vx, "d");
+        Aresta ae = new Aresta(vw,vx, "e");
+        Aresta af = new Aresta(vu,vx, "f");
+        Aresta ag = new Aresta(vx,vy, "g");
         g.addAresta(aa);
         g.addAresta(ab);
         g.addAresta(ac);
