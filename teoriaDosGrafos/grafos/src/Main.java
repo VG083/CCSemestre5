@@ -7,24 +7,27 @@ public class Main {
 
         Grafo g = new Grafo(true);
         Vertice vu = new Vertice("u");
+        g.addVertice(vu);
+        Aresta aa = new Aresta(vu,vu, "a");
+        g.addAresta(aa);
         Vertice vv = new Vertice("v");
         Vertice vw = new Vertice("w");
         Vertice vx = new Vertice("x");
         Vertice vy = new Vertice("y");
-        g.addVertice(vu);
+
         g.addVertice(vv);
         g.addVertice(vw);
         g.addVertice(vx);
         g.addVertice(vy);
 
-        Aresta aa = new Aresta(vu,vu, "a");
+
         Aresta ab = new Aresta(vv,vw, "b");
         Aresta ac = new Aresta(vw,vx, "c");
         Aresta ad = new Aresta(vv,vx, "d");
         Aresta ae = new Aresta(vw,vx, "e");
         Aresta af = new Aresta(vu,vx, "f");
         Aresta ag = new Aresta(vx,vy, "g");
-        g.addAresta(aa);
+
         g.addAresta(ab);
         g.addAresta(ac);
         g.addAresta(ad);
