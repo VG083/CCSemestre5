@@ -90,6 +90,98 @@ public class Grafo {
         }
         return adjacencias;
     }
+    /*
+    public int calculoComprimento() {
+        int comprimentoTotal = 0;
+        List<Vertice> vertices = this.vertices; // Lista de vértices
+
+        for (int i = 0; i < vertices.size() - 1; i++) {
+            Vertice origem = vertices.get(i);
+            for (int j = i + 1; j < vertices.size(); j++) {
+                Vertice destino = vertices.get(j);
+                int comprimento = calculoComprimento(origem, destino);
+                if (comprimento >= 0) {
+                    comprimentoTotal += comprimento;
+                } else {
+                    // Caso não exista caminho entre origem e destino, podemos tomar uma ação adequada
+                    // Por exemplo, lançar uma exceção ou lidar com o valor -1 de acordo com a necessidade
+                }
+            }
+        }
+        return comprimentoTotal;
+    }
+    */
+
+    public List<Vertice> calculoMenorCaminho(Vertice origem, Vertice destino) {
+        List<Vertice> caminho = new ArrayList<>();
+        caminho.add(origem);
+        boolean encontrado = buscaMenorCaminho(origem, destino, caminho);
+        if (encontrado)
+            return caminho;
+        else
+            return null;
+    }
+
+    private boolean buscaMenorCaminho(Vertice atual, Vertice destino, List<Vertice> caminho) {
+        if (atual == destino)
+            return true;
+
+        List<Vertice> adjacencias = obtemAdjacencias(atual);
+        for (Vertice adjacente : adjacencias) {
+            if (!caminho.contains(adjacente)) {
+                caminho.add(adjacente);
+                boolean encontrado = buscaMenorCaminho(adjacente, destino, caminho);
+                if (encontrado)
+                    return true;
+                caminho.remove(adjacente);
+            }
+        }
+
+        return false;
+    }
+
+    // Método para realizar uma busca em profundidade no grafo a partir de um vértice de origem até um vértice de destino
+    public List<Vertice> buscaEmProfundidade(Vertice origem, Vertice destino) {
+        List<Vertice> caminho = new ArrayList<>(); // Cria uma lista vazia para armazenar o caminho percorrido
+        caminho.add(origem); // Adiciona o vértice de origem ao caminho
+        boolean encontrado = buscaEmProfundidadeRecursiva(origem, destino, caminho); // Chama o método de busca em profundidade recursiva para encontrar o destino a partir da origem
+        if (encontrado)
+            return caminho; // Retorna o caminho se o destino for encontrado
+        else
+            return null; // Retorna null se o destino não for encontrado
+    }
+
+    // Método recursivo para realizar a busca em profundidade
+    private boolean buscaEmProfundidadeRecursiva(Vertice atual, Vertice destino, List<Vertice> caminho) {
+        if (atual == destino)
+            return true; // Se o vértice atual for o destino, retorna true indicando que o destino foi encontrado
+        List<Vertice> adjacencias = obtemAdjacencias(atual); // Obtém os vértices adjacentes ao vértice atual
+        for (int i = adjacencias.size() - 1; i >= 0; i--) {
+            Vertice adjacente = adjacencias.get(i); // Obtém um vértice adjacente
+            Aresta aresta = obtemAresta(atual, adjacente); // Obtém a aresta entre o vértice atual e o vértice adjacente
+            if (!caminho.contains(adjacente)) { // Verifica se o vértice adjacente já está no caminho percorrido
+                caminho.add(adjacente); // Adiciona o vértice adjacente ao caminho percorrido
+                boolean encontrado = buscaEmProfundidadeRecursiva(adjacente, destino, caminho); // Chama recursivamente o método de busca em profundidade para o vértice adjacente
+                if (encontrado)
+                    return true; // Se o destino for encontrado a partir do vértice adjacente, retorna true
+                caminho.remove(adjacente); // Remove o vértice adjacente do caminho percorrido para explorar outras opções
+            }
+        }
+        return false; // Se o destino não for encontrado a partir de nenhum dos vértices adjacentes, retorna false
+    }
+
+    private Aresta obtemAresta(Vertice origem, Vertice destino) {
+        for (Aresta aresta : arestas) {
+            if (aresta.getOrigem() == origem && aresta.getDestino() == destino) {
+                return aresta;
+            }
+            if (!isDigrafo && aresta.getOrigem() == destino && aresta.getDestino() == origem) {
+                return aresta;
+            }
+        }
+        return null;
+    }
+
     public void exibeMatrizAdjacencia() {
         int[][] matrizAdjacencia = new int[ordem][ordem];
 
